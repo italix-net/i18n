@@ -1,0 +1,48 @@
+{
+    "name": "italix/i18n",
+    "description": "Translation and formatting on ICU: CLDR plural categories, locale-aware numbers, money and dates, and a key extractor that refuses to guess",
+    "type": "library",
+    "license": "MPL-2.0",
+    "version": "2.0.0",
+    "keywords": [
+        "i18n",
+        "l10n",
+        "translation",
+        "icu",
+        "cldr",
+        "plural",
+        "intl"
+    ],
+    "homepage": "https://github.com/italix-net/i18n",
+    "authors": [
+        {
+            "name": "Italix",
+            "email": "info@italix.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-mbstring": "*",
+        "italix/contracts": "^2.0",
+        "italix/encode": "^1.0"
+    },
+    "suggest": {
+        "ext-intl": "Uses ICU directly when present. Without it the portable engine reads tables baked from ICU, covering the 24 official EU languages for plurals, numbers, money and dates \u2014 and refusing collation, spellout and display names rather than approximating them."
+    },
+    "require-dev": {
+        "italix/testing": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Italix\\I18n\\": ""
+        },
+        "files": [
+            "functions.php"
+        ]
+    },
+    "scripts": {
+        "test": "php tests/I18nTest.php"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
