@@ -3,6 +3,17 @@
 Format: [Keep a Changelog](https://keepachangelog.com/). Versioning policy: `VERSIONING.md` at the
 project root.
 
+## [2.1.0] — 2026-10-24
+
+### Added
+
+- `Slug::of($text, $locale_c, $max_n)` — a URL slug in the language of the URL: the language's own spelling of
+  its letters (`de`: ä ö ü ß → ae oe ue ss; `da`/`nb`/`nn`/`no`: æ ø å → ae oe aa), `&` as the language's "and",
+  then ICU's `Any-Latin; Latin-ASCII`, apostrophes as separators. Without ext-intl a baked table
+  (`data/latin-ascii.php`, `Slug::bake()`/`render()`/`is_current()`, written by `ix i18n:bake`) covers the Latin
+  script; other scripts are refused. `SlugTest` (45), the portable branch compared with ICU over all 688
+  characters of the table; two mutations caught.
+
 ## [2.0.0] — 2026-08-28
 
 ### Changed — BREAKING

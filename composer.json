@@ -3,7 +3,7 @@
     "description": "Translation and formatting on ICU: CLDR plural categories, locale-aware numbers, money and dates, and a key extractor that refuses to guess",
     "type": "library",
     "license": "MPL-2.0",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "keywords": [
         "i18n",
         "l10n",

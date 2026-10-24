@@ -185,6 +185,30 @@ found by running it against a real codebase, not by reasoning about it.
 are the same in both, which is either a real cognate or a line somebody copied and never translated.
 The tool cannot tell them apart and does not pretend to.
 
+## Slugs, in the language of the URL
+
+```php
+Slug::of('Grönland', 'de');              // 'groenland'  — German writes ö as oe
+Slug::of('Grönland', 'it');              // 'gronland'
+Slug::of('Peter Høeg', 'it');            // 'peter-hoeg'
+Slug::of('Ærø', 'da');                   // 'aeroe'      — Danish writes ø as oe, å as aa
+Slug::of("Dell'onda & altro", 'it');     // 'dell-onda-e-altro' — & is the language's "and"
+Slug::of('Il senso di Smilla per la neve', 'it', 20);   // 'il-senso-di-smilla' — cut at a hyphen
+```
+
+The language's own spelling of its letters, then ICU's `Any-Latin; Latin-ASCII`, then one hyphen for every run
+of anything that is not a letter or a digit — apostrophes too. Without ext-intl a table baked from ICU
+(`data/latin-ascii.php`, written by `ix i18n:bake` with the CLDR tables) covers the whole Latin script, and
+`SlugTest` checks it against ICU character by character; Cyrillic, Greek, Han and the rest are refused with
+an exception naming the extension, never dropped into an empty slug. `Slug::of(…, use_intl: false)` forces the
+portable branch, for the same reason `using_engine('portable')` exists.
+
+## Catalogues for a JavaScript front end
+
+`$translator->in($lang)->group('ui')` is one branch of the catalogue, nested, the fallback locale merged
+underneath key by key: what a build step writes to `ui.{lang}.json` for an SPA, so the strings live in one place
+and TypeScript checks every key the components read.
+
 ## Requirements
 
 `php >= 7.4`, `ext-mbstring`, `italix/contracts`, `italix/encode`. `ext-intl` is *suggested*: with it
